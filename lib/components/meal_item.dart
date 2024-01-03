@@ -8,10 +8,18 @@ class MealItem extends StatelessWidget {
   const MealItem(this.meal, {Key? key}) : super(key: key);
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       AppRoutes.mealDetail,
       arguments: meal,
-    );
+    )
+        .then((result) {
+      if (result == null) {
+        print('Sem resultado!');
+      } else {
+        print('O nome da refeição é $result.');
+      }
+    });
   }
 
   @override
@@ -67,23 +75,23 @@ class MealItem extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
+                children: [
                   Row(
-                    children: <Widget>[
+                    children: [
                       const Icon(Icons.schedule),
                       const SizedBox(width: 6),
                       Text('${meal.duration} min'),
                     ],
                   ),
                   Row(
-                    children: <Widget>[
+                    children: [
                       const Icon(Icons.work),
                       const SizedBox(width: 6),
                       Text(meal.complexityText),
                     ],
                   ),
                   Row(
-                    children: <Widget>[
+                    children: [
                       const Icon(Icons.attach_money),
                       const SizedBox(width: 6),
                       Text(meal.costText),
